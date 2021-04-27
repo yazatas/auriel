@@ -6,6 +6,10 @@
 .global execv
 .global _exit
 .global wait
+.global socket
+.global bind
+.global sendto
+.global recv
 
 read:
     mov $0, %rax   # syscall number
@@ -44,5 +48,28 @@ _exit:
 wait:
     mov $7, %rax   # syscall number
     mov %rdi, %rbx # wstatus pointer
+    int $0x80
+    ret
+
+socket:
+    mov $8, %rax
+    mov %rdx, %rcx # buffer length
+    mov %rdi, %rdx # file descriptor
+    mov %rsi, %rbx # buffer of data
+    int $0x80
+    ret
+
+bind:
+    mov $9, %rax
+    int $0x80
+    ret
+
+sendto:
+    mov $10, %rax
+    int $0x80
+    ret
+
+recv:
+    mov $11, %rax
     int $0x80
     ret
