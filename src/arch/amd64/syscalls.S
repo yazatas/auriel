@@ -8,8 +8,13 @@
 .global wait
 .global socket
 .global bind
+.global send
 .global sendto
 .global recv
+.global recvfrom
+.global connect
+.global listen
+.global accept
 
 read:
     mov $0, %rax   # syscall number
@@ -64,12 +69,37 @@ bind:
     int $0x80
     ret
 
-sendto:
+send:
     mov $10, %rax
     int $0x80
     ret
 
-recv:
+sendto:
     mov $11, %rax
+    int $0x80
+    ret
+
+recv:
+    mov $12, %rax
+    int $0x80
+    ret
+
+recvfrom:
+    mov $13, %rax
+    int $0x80
+    ret
+
+connect:
+    mov $14, %rax
+    int $0x80
+    ret
+
+listen:
+    mov $15, %rax
+    int $0x80
+    ret
+
+accept:
+    mov $16, %rax
     int $0x80
     ret
